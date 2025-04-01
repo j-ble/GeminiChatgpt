@@ -1,6 +1,6 @@
 # Gemini API Chatbot Example Project
 
-This project demonstrates a simple interaction with the Google Gemini API using the Python client library and potentially uses MCP features.
+This project demonstrates how to build chat applications using the Google Gemini API. It includes both a command-line chat interface and a web-based UI with Streamlit.
 
 ## Setup Instructions
 
@@ -34,10 +34,14 @@ You should see `(venv)` at the beginning of your terminal prompt.
 Install the required Python packages using pip:
 
 ```bash
-pip install -q -U google-genai python-dotenv "mcp[cli]"
+pip install -r requirements.txt
 ```
 
-*(Optional but recommended: Create a `requirements.txt` file containing the dependencies, then use `pip install -r requirements.txt`)*
+The requirements.txt file includes:
+- google-generativeai: Google's official Python SDK for Gemini API
+- python-dotenv: For loading environment variables
+- streamlit: For the web interface
+- Other supporting libraries (requests, pydantic)
 
 ### 4. Configure Environment Variables
 
@@ -55,18 +59,48 @@ This project uses an API key for the Google Generative AI service.
 
     Replace `"YOUR_ACTUAL_API_KEY_HERE"` with your real API key. **Important:** Do not commit your `.env` file (or your API key directly) to version control. Add `.env` to your `.gitignore` file.
 
-### 5. Run the Application
+## Running the Applications
 
-With the virtual environment activated and the `.env` file configured, you can run the main script (assuming it's `app.py`):
+This project provides two different ways to interact with the Gemini AI:
 
-```bash
-python3 app.py
-```
+### Command Line Interface (CLI)
 
-Or potentially run MCP commands if using `server.py`:
+The CLI version provides a simple terminal-based chat interface:
 
 ```bash
-mcp serve server:mcp
+python app.py
 ```
 
-The script will load the API key, connect to the Gemini API, send a prompt, and print the response.
+- Type your messages directly in the terminal
+- The conversation history is maintained throughout the session
+- Type 'quit' or 'exit' to end the chat
+
+### Web Interface (Streamlit)
+
+The Streamlit app provides a more user-friendly web interface:
+
+```bash
+streamlit run streamlit_app.py
+```
+
+Features:
+- Clean chat UI with user/assistant message bubbles
+- Conversation history persists between interactions
+- Clear chat button to start a new conversation
+- Instructions sidebar with usage guidance
+
+## Project Components
+
+- `app.py`: Command-line chat interface
+- `streamlit_app.py`: Web-based chat interface
+- `requirements.txt`: Project dependencies
+- `.env`: Configuration for API keys (not included in repo)
+
+## Troubleshooting
+
+If you encounter any issues:
+
+1. Make sure your API key is properly set in the `.env` file
+2. Ensure all dependencies are installed with `pip install -r requirements.txt`
+3. Check that you're using the correct model name (this project uses "gemini-2.5-pro-exp-03-25")
+4. If the Streamlit interface fails, try the CLI version first to verify API connectivity
